@@ -78,5 +78,31 @@ namespace efCoreApp.Controllers
 
             return View(model); // Hatalıysa formu tekrar göster
         }
+
+        // Öğrenci Silme   GET → Onay sayfasını göster
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var ogrenci = await _context.Ogrenciler.FindAsync(id);
+            if (ogrenci == null)
+            {
+                return NotFound();
+            }
+            return View(ogrenci); // Kullanıcıya "Emin misin?" diye sorar
+        }
+
+        // POST → Gerçekten silme işlemini yap
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var ogrenci = await _context.Ogrenciler.FindAsync(id);
+            if (ogrenci != null)
+            {
+                _context.Ogrenciler.Remove(ogrenci);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

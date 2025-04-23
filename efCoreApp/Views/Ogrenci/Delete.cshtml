@@ -1,0 +1,19 @@
+﻿@model efCoreApp.Data.Ogrenci
+
+@{
+    ViewData["Title"] = "Silme Onayı";
+}
+
+<h2>Öğrenciyi Sil</h2>
+
+<div class="alert alert-danger">
+    <strong>@Model.OgrenciAd @Model.OgrenciSoyad</strong> adlı öğrenciyi silmek istediğinize emin misiniz?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="OgrenciId" />
+
+    <button type="submit" class="btn btn-danger">Evet, Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Hayır, Vazgeç</a>
+</form>
+
