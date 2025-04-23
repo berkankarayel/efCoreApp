@@ -1,0 +1,41 @@
+﻿@model IEnumerable<efCoreApp.Data.Ogrenci>
+
+@{
+    ViewData["Title"] = "Öğrenci Listesi";
+}
+
+<h2>Öğrenci Listesi</h2>
+<a href="/Ogrenci/Create" class="btn btn-primary mb-3">
+    + Yeni Öğrenci Ekle
+</a>
+<hr />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>E-posta</th>
+            <th>Telefon</th>
+            <th>İşlemler</th> <!-- Butonlar için yeni sütun -->
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ogrenci in Model)
+        {
+            <tr>
+                <td>@ogrenci.OgrenciId</td>
+                <td>@ogrenci.OgrenciAd</td>
+                <td>@ogrenci.OgrenciSoyad</td>
+                <td>@ogrenci.Eposta</td>
+                <td>@ogrenci.Telefon</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@ogrenci.OgrenciId" class="btn btn-warning btn-sm">Düzenle</a>
+
+                    <a asp-action="Delete" asp-route-id="@ogrenci.OgrenciId" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
